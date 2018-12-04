@@ -1,8 +1,7 @@
-import { ReflectionMetadataTypes } from "./ReflectionMetadata";
 import { Observer, Observable, Subscription } from "../async/rx";
 import "reflect-metadata";
 
-export class MetadataRegistryService<T = ReflectionMetadataTypes> {
+export class MetadataRegistryService {
 
     /**
      * the private instance
@@ -12,8 +11,8 @@ export class MetadataRegistryService<T = ReflectionMetadataTypes> {
     /**
      * the metadata observable
      */
-    private metadataObserver!: Observer<[any, keyof T, any]>;
-    private metadataObservable = new Observable<[any, keyof T, any]>(observer => {
+    private metadataObserver!: Observer<[any, string, any]>;
+    private metadataObservable = new Observable<[any, string, any]>(observer => {
         this.metadataObserver = observer;
 
         // dispatch all activity from the queue
@@ -25,7 +24,7 @@ export class MetadataRegistryService<T = ReflectionMetadataTypes> {
     /**
      * all metadata activity that took place before observable was ready
      */
-    private metadataQueue: [any, keyof T, any][] = [];
+    private metadataQueue: [any, string, any][] = [];
 
     /**
      * get the instance
@@ -42,7 +41,7 @@ export class MetadataRegistryService<T = ReflectionMetadataTypes> {
     /**
      * observe the metadata adding
      */
-    public observe<V = any>(): Observable<[any, keyof T, V]> {
+    public observe<V = any>(): Observable<[any, string, V]> {
 
         return this.metadataObservable;
     }
@@ -53,7 +52,7 @@ export class MetadataRegistryService<T = ReflectionMetadataTypes> {
      * @param target the target class
      * @param value the value to add
      */
-    public addToUniqueObjectStack<K extends keyof T>(metadataKey: K, target: any, value: T[K]): void {
+    public addToUniqueObjectStack(metadataKey: string, target: any, value: any): void {
 
         // get the current stack
         const currentStack: any[] = Reflect.getMetadata(metadataKey, target);
@@ -82,7 +81,7 @@ export class MetadataRegistryService<T = ReflectionMetadataTypes> {
      * @param target the target class
      * @param value the value to add/overwrite
      */
-    public setValue<K extends keyof T>(metadataKey: K, target: any, value: T[K]): void {
+    public setValue(metadataKey: string, target: any, value: any): void {
 
         // just define/overwrite
         Reflect.defineMetadata(metadataKey, value, target);
@@ -100,7 +99,7 @@ export class MetadataRegistryService<T = ReflectionMetadataTypes> {
      * @param metadataKey the metadata key from the `ReflectionMetadata` enum
      * @param target the target class
      */
-    public exists(metadataKey: T, target: any): boolean {
+    public exists(metadataKey: string, target: any): boolean {
 
         return Reflect.getMetadata(metadataKey, target) !== undefined;
     }
@@ -110,7 +109,7 @@ export class MetadataRegistryService<T = ReflectionMetadataTypes> {
      * @param metadataKey the metadata key from the `ReflectionMetadata` enum
      * @param target the target class
      */
-    public get<K extends keyof T>(metadataKey: K, target: any): T[K] {
+    public get(metadataKey: string, target: any): any {
 
         return Reflect.getMetadata(metadataKey, target);
     }
@@ -121,7 +120,7 @@ export class MetadataRegistryService<T = ReflectionMetadataTypes> {
      * @param target the target class
      * @param value the value to check for
      */
-    public isOnStack<K extends keyof T>(metadataKey: K, target: any, value: T[K]): boolean {
+    public isOnStack(metadataKey: string, target: any, value: any): boolean {
 
         // get the current stack
         const currentStack: any[] = Reflect.getMetadata(metadataKey, target);

@@ -3,6 +3,7 @@
     "compilerOptions": {
         "declaration": true,
         "emitDeclarationOnly": true,
+        "outFile": "dist/declaration.d.ts",
         "removeComments": false
     }
 }
