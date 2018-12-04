@@ -32,14 +32,22 @@ export function Injectable(options: InjectableOptions = { singleton: true }): Cl
             /**
              * override the constructor to perform dependency injection
              */
-            constructor() {
+            constructor(...args: any[]) {
 
                 /**
                  * resolves all dependencies on the target using the injector
                  */
-                super(...injector.resolve(target)
-                    .map(token => injector.instantiateClass(token))
-                );
+                if (options.skipOwnDependencies) {
+
+                    // skip dependencies
+                    super(...args);
+                } else {
+
+                    // resolve all deps
+                    super(...injector.resolve(target)
+                        .map(token => injector.instantiateClass(token))
+                    );
+                }
             }
         };
     });

@@ -6,4 +6,11 @@ export interface InjectableOptions {
      * @default true
      */
     singleton?: boolean;
+
+    /**
+     * a flag that indicates that the injector should not resolve the constructor
+     * properties of the decorated class. this allows patterns like constructing an object
+     * with given parameters and add it to the injector cache.
+     */
+    skipOwnDependencies?: boolean;
 }
