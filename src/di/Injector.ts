@@ -113,22 +113,22 @@ export class Injector {
     }
 
     /**
+     * add the given instance to the cache
+     * @param target the constructor
+     * @param instance the instance
+     */
+    public addToCache<T extends object>(target: ClassConstructor<T>, instance: T): void {
+
+        this.cache[this.getCacheIndex(target)] = instance;
+    }
+
+    /**
      * get the given target from the cache
      * @param target the target to get from the cache
      */
     private getFromCache<T extends object>(target: ClassConstructor<T>): T | undefined {
 
         return this.cache[this.getCacheIndex(target)] as T;
-    }
-
-    /**
-     * add the given instance to the cache
-     * @param target the constructor
-     * @param instance the instance
-     */
-    private addToCache<T extends object>(target: ClassConstructor<T>, instance: T): void {
-
-        this.cache[this.getCacheIndex(target)] = instance;
     }
 
     /**

@@ -4,7 +4,7 @@ import { Injector } from "../../src/di/Injector";
 import { Injectable } from "../../src/di/Injectable";
 import { InjectorError } from "../../src/error/InjectorError";
 
-@suite("engine/di/Injector") class InjectorSpec {
+@suite("di/Injector") class InjectorSpec {
 
     @test "Injector.getInstance() is working"() {
 
