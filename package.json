@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
-  "types": "dist/declaration.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "./node_modules/.bin/mocha -r ts-node/register \"test/**/*.spec*.ts\"",
     "test:coverage": "./node_modules/.bin/nyc ./node_modules/.bin/mocha -r ts-node/register \"test/**/*.spec*.ts\"",
