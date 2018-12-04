@@ -1,5 +1,6 @@
 import { ClassConstructor } from "../constraint/ClassConstructor";
 import { Injector } from "./Injector";
+import { InjectorError } from "../error/InjectorError";
 import "reflect-metadata";
 
 /**
@@ -20,7 +21,7 @@ export function Inject(...dependencies: ClassConstructor[]): MethodDecorator & P
 
                 if (!token) {
                     const key = propertyKey.toString();
-                    throw new Error(
+                    throw new InjectorError(
                         `No type metadata for ${key} on ${target.constructor.name} found. Please add a type or provide a class via decorator parameter.`
                     );
                 }
