@@ -1,0 +1,41 @@
+{
+  "name": "@qhun-engine/base",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha -r ts-node/register \"test/**/*.spec*.ts\"",
+    "test:coverage": "./node_modules/.bin/nyc ./node_modules/.bin/mocha -r ts-node/register \"test/**/*.spec*.ts\"",
+    "build": "./node_modules/.bin/tsc",
+    "lint": "./node_modules/.bin/tslint --project .",
+    "build:declaration": "./node_modules/.bin/tsc -p ./tsconfig.declaration.json",
+    "start": "echo 'Base module has no start command'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qhun-engine/base"
+  },
+  "keywords": [
+    "qhun-engine"
+  ],
+  "author": "wartoshika <dev@qhun.de>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/express": "^4.16.0",
+    "@types/fpsmeter": "^0.3.29",
+    "@types/mocha": "^5.2.5",
+    "chai": "^4.2.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.2.0",
+    "mocha-typescript": "^1.1.17",
+    "nyc": "^13.1.0",
+    "ts-loader": "^5.3.0",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.1.6"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.1.12"
+  }
+}
